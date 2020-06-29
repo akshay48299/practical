@@ -1,0 +1,9 @@
+{
+  "dev": true,
+  "mongodb_port": 27017,
+  "port": 2000,
+  "host": "localhost",
+  "db_name": "practical",
+  "database_backup_days": 2,
+  "from_mail": "no-reply@thetatechnolabs.com"
+}
