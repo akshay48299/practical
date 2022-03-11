@@ -114,20 +114,12 @@ let ServicePhotoCtrl = {
         if (!photoModel) {
           next();
         } else {
-          UserProfileModel.find({'summaryHistory': { $in: [input.oldPhotoId]}}, function (err, checkPhoto) {
+          PhotoHelper.deleteFiles([photoModel.path, photoModel.thumbnailPath], function(err) {
             if (err) {
               responseHandler.sendInternalServerError(response, err, err.name);
-            } else if (checkPhoto && checkPhoto.length > 0) {
-              next();
             } else {
-              PhotoHelper.deleteFiles([photoModel.path, photoModel.thumbnailPath], function(err) {
-                if (err) {
-                  responseHandler.sendInternalServerError(response, err, err.name);
-                } else {
-                  photoModel.remove();
-                  next();
-                }
-              });
+              photoModel.remove();
+              next();
             }
           });
         }
